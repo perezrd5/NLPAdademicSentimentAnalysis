@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+*
+{
+	font-family: 'Poppins';
+	outline: none;
+}
+body
+{
+	margin: 0;
+	padding: 0;
+}
+.review_section
+{
+	background: #f9f9fa;
+	min-height: 100vh;
+}
+.field_label
+{
+	font-weight: 600;
+	margin-bottom: 4px;
+}
+.review_field
+{
+	height: 90px;
+	resize: none;
+	border: 1px solid #cdcdcd;
+	padding: 8px 14px;
+	border-radius: 10px;
+	transition: .4s ease;
+}
+.review_field:focus
+{
+	border: 1px solid #6c5ce7;
+	box-shadow: 0 0 10px rgba(108, 92, 231, .3);
+}
+.upload-btn
+{
+	background: #6c5ce7;
+	border: 1px solid #6c5ce7;
+	color: #fff;
+	transition: .4s ease;
+}
+.upload-btn:hover
+{
+	background: transparent;
+	color: #6c5ce7;
+}
+.review_data
+{
+	width: 610px;
+}
+.table_review
+{
+	background: #fff;
+	overflow: hidden;
+	border-radius: 5px;
+}
+.review_header
+{
+	background: #6c5ce7;	
+}
+.review_head
+{
+	color: #fff;
+}

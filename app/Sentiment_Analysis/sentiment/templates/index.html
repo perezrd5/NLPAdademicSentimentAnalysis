@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Index</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+</head>
+<body>
+	<section class="review_section">
+		<div class="container">
+			<form method="post">
+				{% csrf_token %}
+				<div class="inner_wrapper py-4 mb-4">
+					<div class="">
+						<label class="field_label">Enter Review Here</label>
+						<textarea id="input_text" class="form-control review_field mb-3" placeholder="Enter Review" name="input_text"></textarea>
+						<div id='divError'></div>
+						<button class="btn upload-btn" id="upload-preview">Upload Review</button>
+					</div>
+				</div>
+			</form>
+			<div class="table_review">
+				<div class="table-responsive">
+					<table class="table mb-0 table-striped">
+						<thead class="review_header">
+							<tr>
+								<th class="review_head">S. No.</th>
+								<th class="review_head">Review</th>
+								<th class="review_head">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for data in sentiments_data %}
+							<tr>
+								<td class="sno_data">
+									<p class="sno_text">{{forloop.counter}}</p>
+								</td>
+								<td class="review_data">
+									<p class="m-0">{{data.input_txt}}</p>
+								</td>
+								
+								<td class="action_data">
+									<button type="submit" class="btn btn-danger py-1 px-2" id="delete-btn" data-delete_url='{% url 'delete-sentiments' data.id %}'><i class="fa-solid fa-trash"></i></button>
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script>
+		$("#upload-preview").on('click', function(e){
+			var input_value = $('textarea#input_text').val();
+			if (input_value=="" || typeof(input_value) === "undefined"){
+				$("#divError").html("Please enter value").addClass("error-msg");
+				return false;
+			}
+			else{
+				$("#divError").html("").removeClass("error-msg");
+				return true;
+			}
+		});
+		$("#delete-btn").on('click', function(){
+			var result = confirm('Are you sure you want to delete the record.');
+			var delete_url = $(this).data("delete_url")
+			if(result){
+				location.href=delete_url
+			}
+			else{
+				return false;
+			}
+		});
+	</script>
+</html>
